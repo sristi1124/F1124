@@ -1,41 +1,49 @@
 #include <iostream>
 using namespace std;
 
-int main() {
-    int a1[100];
-    int a2[100];
-    int u[200];  // union can have up to n1+n2 elements
-    int n1, n2;
-    cin >> n1 >> n2;
-
-    for (int i = 0; i < n1; i++) cin >> a1[i];
-    for (int i = 0; i < n2; i++) cin >> a2[i];
-
-    int k = 0;
-    // Copy all a1 elements into union array
-    for (int i = 0; i < n1; i++) {
-        u[k++] = a1[i];
+// Insert value at position pos (0-based index)
+void insertElement(int arr[], int &n, int pos, int value) {
+    // TODO: Implement
+    if (pos < 0 || pos > n) {
+        cout << "Invalid position for insertion." << endl;
+        return;
     }
+    for (int i = n; i > pos; --i) {
+        arr[i] = arr[i - 1];
+    }
+     arr[pos] = value;
+    n++;
+}
 
-    // Add elements from a2 if not already present
-    for (int i = 0; i < n2; i++) {
-        bool found = false;
-        for (int j = 0; j < n1; j++) {
-            if (a2[i] == a1[j]) {
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-            u[k++] = a2[i];
+// Delete element at position pos (0-based index)
+void deleteElement(int arr[], int &n, int pos) {
+    // TODO: Implement
+     if (pos < 0 || pos >= n) {
+        cout << "Invalid position for deletion." << endl;
+        return;
+     }
+     for (int i = pos; i < n - 1; ++i) {
+        arr[i] = arr[i + 1];
+    }
+    n--;
+}
+
+// Search for key and return its index, else return -1
+int searchElement(int arr[], int n, int key) {
+    // TODO: Implement
+    for (int i = 0; i < n; ++i) {
+        if (arr[i] == key) {
+            return i;
         }
     }
+    return -1;
+}
 
-    // Print union
-    for (int i = 0; i < k; i++) {
-        cout << u[i] << " ";
+// Print all elements in array
+void traverseArray(int arr[], int n) {
+    // TODO: Implement
+    for (int i = 0; i < n; ++i) {
+        cout << arr[i] << " "<<endl;
     }
     cout << endl;
-
-    return 0;
 }
